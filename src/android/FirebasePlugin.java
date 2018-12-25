@@ -751,9 +751,11 @@ public class FirebasePlugin extends CordovaPlugin {
                                 Field[] fields = credential.getClass().getDeclaredFields();
                                 for (Field field : fields) {
                                     Class type = field.getType();
+                                    Log.d("MY_TAG_DEBUG", field + " " + value);
+                                    Log.d("MY_TAG_DEBUG", "credential: " + credential)
                                     if(type == String.class){
                                         String value = getPrivateField(credential, field);
-                                        Log.d("MY_TAG_DEBUG", field + " " + value);
+                                        
                                         if(value == null) continue;
                                         if(value.length() > 100) verificationId = value;
                                         else if(value.length() >= 4 && value.length() <= 6) code = value;
