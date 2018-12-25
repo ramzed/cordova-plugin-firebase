@@ -751,21 +751,21 @@ public class FirebasePlugin extends CordovaPlugin {
                                 Field[] fields = credential.getClass().getDeclaredFields();
                                 for (Field field : fields) {
                                     Class type = field.getType();
-                                    Log.d("MY_TAG_DEBUG", field + " " + getPrivateField(credential, field));
-                                    Log.d("MY_TAG_DEBUG", "credential: " + credential);
                                     if(type == String.class){
                                         String value = getPrivateField(credential, field);
-                                        
                                         if(value == null) continue;
                                         if(value.length() > 100) verificationId = value;
                                         else if(value.length() >= 4 && value.length() <= 6) code = value;
                                     }
                                 }
-                                returnResults.put("credential", credential);
                                 returnResults.put("verified", verificationId != null && code != null);
                                 returnResults.put("verificationId", verificationId);
                                 returnResults.put("code", code);
                                 returnResults.put("instantVerification", true);
+                                if (!verificationId) {
+                                    FirebaseUser user = new FirebaseAuth.getCurrentUser();
+                                    returnResults.put("token", user.getIdToken());
+                                }
                             } catch(JSONException e){
                                 Crashlytics.logException(e);
                                 callbackContext.error(e.getMessage());
