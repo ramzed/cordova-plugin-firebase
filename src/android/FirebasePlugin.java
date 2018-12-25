@@ -759,6 +759,7 @@ public class FirebasePlugin extends CordovaPlugin {
                                         else if(value.length() >= 4 && value.length() <= 6) code = value;
                                     }
                                 }
+                                returnResults.put("credential", credential);
                                 returnResults.put("verified", verificationId != null && code != null);
                                 returnResults.put("verificationId", verificationId);
                                 returnResults.put("code", code);
