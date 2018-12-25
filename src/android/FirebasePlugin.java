@@ -751,7 +751,7 @@ public class FirebasePlugin extends CordovaPlugin {
                                 Field[] fields = credential.getClass().getDeclaredFields();
                                 for (Field field : fields) {
                                     Class type = field.getType();
-                                    Log.d("MY_TAG_DEBUG", field + " " + value);
+                                    Log.d("MY_TAG_DEBUG", field + " " + getPrivateField(credential, field));
                                     Log.d("MY_TAG_DEBUG", "credential: " + credential);
                                     if(type == String.class){
                                         String value = getPrivateField(credential, field);
