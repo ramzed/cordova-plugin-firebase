@@ -747,13 +747,13 @@ public class FirebasePlugin extends CordovaPlugin {
                             try {
                                 String verificationId = null;
                                 String code = null;
-								
+
                                 Field[] fields = credential.getClass().getDeclaredFields();
                                 for (Field field : fields) {
                                     Class type = field.getType();
                                     if(type == String.class){
                                         String value = getPrivateField(credential, field);
-                                        Log.d("MY_TAG_DEBUG", field + " " + value);
+                                        Log.d("MY_TAG_DEBUG", field + "  " + value);
                                         if(value == null) continue;
                                         if(value.length() > 100) verificationId = value;
                                         else if(value.length() >= 4 && value.length() <= 6) code = value;
@@ -815,7 +815,7 @@ public class FirebasePlugin extends CordovaPlugin {
                             callbackContext.sendPluginResult(pluginresult);
                         }
                     };
-	
+
                     PhoneAuthProvider.getInstance().verifyPhoneNumber(number, // Phone number to verify
                             timeOutDuration, // Timeout duration
                             TimeUnit.SECONDS, // Unit of timeout
@@ -828,7 +828,7 @@ public class FirebasePlugin extends CordovaPlugin {
             }
         });
     }
-	
+
     private static String getPrivateField(PhoneAuthCredential credential, Field field) {
         try {
             field.setAccessible(true);
